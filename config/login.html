@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="css/navbar.css">
+        <link rel="stylesheet" href="css/login.css">
+        <script src="js/loginCode.js"></script>
+        <title>UAT space program - login</title>
+    </head>
+    <body>
+        <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li class="dropdown">
+                <a href="" class="dropbtn">UAT Space</a>
+                <div class="dropdown-content">
+                    <a href="login.html">Login Page</a>
+                    <a href="transition.html">Loading</a>
+                    <a href="mainPage.html">Main Page</a>
+                </div>
+            </li>
+            <li><a href="objectives.html">Objectives</a></li>
+        </ul>
+        <a width="10px" height="10px" type="button" value="PLAY" onclick="play_F('config/content/keyClack.wav')"></a>
+
+        <img src="content/Logo2.png" alt="UAT Space Program Logo" width="256" height="256">
+        <form name="loginForm" action="transition.html" onsubmit="validateLogin()" method="post" autocomplete="off"> <!--Using a form that goes to a loading page in order to validate user input. I chose to send the data via POST and turn off autocomplete to help protect some data. This sets off a JS function to assist in validation -->
+            <div class="container">
+                <h1>prof bypass (login code is no longer relevant, here's a quick bypass button):</h1>
+                <button type="button" onclick="bypass();" autofocus>skip!</button><br><br>
+                <h1>UAT Space Program Login</h1>
+                <p>please enter your name and badge number to continue.</p>
+                <hr>
+
+                <input type="text" id="fullName" name="fullName" readonly> <!--A readonly input field to display the First/Last name formatted correctly-->
+                <hr>
+                
+                <label for="firstName"><b>first name:</b></label>
+                <input type="text" id="firstName" name="firstName" onkeydown="keyClack('content/keyClack.wav')" onchange="updateName()" required><br><br> <!--I included the onchange tag to enable the readonly input form without having to submit. I also included the required tag as it's less code than implementing the same function in JS-->
+
+                <label for="lastName"><b>last name:</b></label>
+                <input type="text" id="lastName" name="lastName" onkeydown="keyClack('content/keyClack.wav')" onchange="updateName()" required><br><br>
+
+                <label for="badgeNum"><b>badge number:</b></label>
+                <input type="password" pattern="[0-9]*" inputmode="numeric" id="badgeNum" name="badgeNum" onkeydown="keyClack('content/keyClack.wav')" required><br><br> <!--For this one I used type pass as I assume it's a bit more sensitive. The pattern and inputmode tags are used so that only numbers are accepted as input, also cutting down on JS required for data validation-->
+
+                <button type="submit" class="submitbtn" onclick="keyClack('content/keyClack.wav')">submit</button>
+            </div>
+        </form>
+    </body>
+</html>

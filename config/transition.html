@@ -1,0 +1,27 @@
+<!DOCTYPE html> <!--A loading/transition screen just for some flair, the JS is integrated into the HTML as it wasn't enough to warrant its own file.-->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="css/navbar.css">
+        <link rel="stylesheet" href="css/login.css">
+        <title>UAT space program - Loading...</title>
+    </head>
+    <body>
+        <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li class="dropdown">
+                <a href="" class="dropbtn">UAT Space</a>
+                <div class="dropdown-content">
+                    <a href="login.html">Login Page</a>
+                    <a href="transition.html">Loading</a>
+                    <a href="mainPage.html">Main Page</a>
+                </div>
+            </li>
+            <li><a href="objectives.html">Objectives</a></li>
+        </ul>
+        <img src="content/blastOffPic.gif" alt="Loading..." height="768">
+        <h1>loading...</h1>
+    <script>
+        setTimeout(() => {window.open("mainPage.html", "_self"); }, 2500);
+    </script> <!--Just a short 2.5s wait and then it opens the main page-->
+</html>

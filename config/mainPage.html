@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>UAT Space Program</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="css/navbar.css">
+        <link rel="stylesheet" href="css/styling.css">
+        <script src="js/code.js"></script>
+        <script src="js/launchData.js"></script>
+        <script src="js/dataLoader.js"></script>
+        <script>
+            var lastIteration = 0;
+            var time_interval = 5000;
+            var running = true;
+            var index = 0;
+            var timer;
+
+            var data = getData();
+        </script>
+    </head>
+    <body>
+        <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li class="dropdown">
+                <a href="" class="dropbtn">UAT Space</a>
+                <div class="dropdown-content">
+                    <a href="login.html">Login Page</a>
+                    <a href="transition.html">Loading</a>
+                    <a href="mainPage.html">Main Page</a>
+                </div>
+            </li>
+            <li><a href="objectives.html">Objectives</a></li>
+        </ul>
+
+        <div id="clock">Time</div>
+        <img src="content/logo2.png" alt="UAT Space Program Logo" width="256" height="256">
+        <audio id="background" controls style="float:right">
+            <source src="content/bg_quiet.m4a" type="audio/mp4">
+        </audio>
+        
+        <h1>UAT Space Program</h1>
+        <h2>mission 3</h2>
+
+        <p>Flight recorder telemetry is displayed in <span style="color:orange">orange</span>.</p>
+        <br>
+        <table class="telemetry" id="data" border="2" width="70%">
+            <col style="width: 35%">
+            <col style="width: 35%">
+            <thead>
+                <th>Data Type</th>
+                <th>Reading</th>
+            </thead>
+            <tbody style="font-size:25px">
+                <tr id ="Time"><td>&nbsp;</td><td>&nbsp;</td></tr> <!--Used non breaking space to populate the table so that it doesn't pop up all at once-->
+                <tr id ="Lat"><td>&nbsp;</td><td>&nbsp;</td></tr>
+                <tr id ="Long"><td>&nbsp;</td><td>&nbsp;</td></tr>
+                <tr id ="GPSAlt"><td>&nbsp;</td><td>&nbsp;</td></tr>
+                <tr id ="BMPAlt"><td>&nbsp;</td><td>&nbsp;</td></tr>
+                <tr id ="BMPPres"><td>&nbsp;</td><td>&nbsp;</td></tr>
+                <tr id ="BMPTmp"><td>&nbsp;</td><td>&nbsp;</td></tr>
+                <tr id ="DigTmp"><td>&nbsp;</td><td>&nbsp;</td></tr>
+                <tr id ="CSSTmp"><td>&nbsp;</td><td>&nbsp;</td></tr>
+                <tr id ="CSSCO2"><td>&nbsp;</td><td>&nbsp;</td></tr>
+                <tr id ="CSSTVOC"><td>&nbsp;</td><td>&nbsp;</td></tr>
+                <tr id ="UV"><td>&nbsp;</td><td>&nbsp;</td></tr>
+                <tr id ="AccX"><td>&nbsp;</td><td>&nbsp;</td></tr>
+                <tr id ="AccY"><td>&nbsp;</td><td>&nbsp;</td></tr>
+                <tr id ="AccZ"><td>&nbsp;</td><td>&nbsp;</td></tr>
+                <tr id ="MagX"><td>&nbsp;</td><td>&nbsp;</td></tr>
+                <tr id ="MagY"><td>&nbsp;</td><td>&nbsp;</td></tr>
+                <tr id ="MagZ"><td>&nbsp;</td><td>&nbsp;</td></tr>
+                <tr id ="GyrX"><td>&nbsp;</td><td>&nbsp;</td></tr>
+                <tr id ="GyrY"><td>&nbsp;</td><td>&nbsp;</td></tr>
+                <tr id ="GyrZ"><td>&nbsp;</td><td>&nbsp;</td></tr>
+            </tbody>
+        </table>
+        <button id="startTable" onclick="startReading();" onmouseover="style.background='lightsalmon'" onmouseout="style.background='#ccc'" class="button">Start</button>
+        <button id="stopTable" onclick="stopReading();" onmouseover="style.background='lightblue'" onmouseout="style.background='#ccc'" class="button">Stop</button>
+        <br>
+        <br>
+        <br>
+        <div class="telemetry" id="blastOffText">Blastoff Countdown</div>
+        <img id="blastOffPic" src="content/blastOffPic.gif" style="height:128px;display:none;"/>
+        <button id="startCountdown" onclick="blastOffTimer();" onmouseover="style.background='lightsalmon'" onmouseout="style.background='#ccc'" class="button">Start Countdown</button>
+        <br>
+        <br>
+        <br>
+        <label class="telemetry" for="apoapsis">Simulate rocket apoapsis:</label>
+        <input type="text" id="apoapsis" name="apoapsis" value="0m" readonly>
+        <p><button id="startBurn" onclick="startBurn();" onmouseover="style.background='lightsalmon'" onmouseout="style.background='#ccc'" class="button">Start Burn</button>  <button id="stopBurn" onclick="stopBurn();" onmouseover="style.background='lightblue'" onmouseout="style.background='#ccc'" class="button">Stop Burn</button></p>
+        <br>
+        <br>
+        <h2>Craps simulator!</h2>
+        <div id="crapsRes">Craps Results</div>
+        <div id="die1Res">First die results</div>
+        <div id="die2Res">Second die results</div>
+        <div id="sumRes">Sum of die</div>
+        <button id="gambleButton" onclick="playCraps();" class="button">Play</button>
+        
+        <br>
+        <br>
+        Number of wins: <div id="wins">0</div>
+        Number of losses: <div id="losses">0</div>
+        Number of ties: <div id="ties">0</div>
+        <br>
+        <br>
+
+        <audio id="countdown" controls style="display:none">
+            <source src="content/countdown.m4a" type="audio/mp4">
+        </audio>
+        <audio id="burnSeqInit" controls style="display:none">
+            <source src="content/burnSeqInit.m4a" type="audio/mp4">
+        </audio>
+        <audio id="maxQ" controls style="display:none">
+            <source src="content/maxQ.m4a" type="audio/mp4">
+        </audio>
+        <audio id="apoKarman" controls style="display:none">
+            <source src="content/apoKarman.m4a" type="audio/mp4">
+        </audio>
+        <audio id="stageSeperation" controls style="display:none">
+            <source src="content/stageSeperation.m4a" type="audio/mp4">
+        </audio>
+        <audio id="apoGSO" controls style="display:none">
+            <source src="content/apoGSO.m4a" type="audio/mp4">
+        </audio>
+    </body>
+</html>
